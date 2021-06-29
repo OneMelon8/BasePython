@@ -12,6 +12,7 @@ PATH_INTENT = "src/nlp/intents.json"
 PATH_WORDS_DATA = "src/nlp/data/bag_of_words.pickle"
 PATH_MODEL = "src/nlp/models/primitive.tflearn"
 
+nltk.download("punkt")
 stemmer = LancasterStemmer()
 
 # Global data variables

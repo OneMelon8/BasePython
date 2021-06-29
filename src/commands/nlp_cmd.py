@@ -23,7 +23,7 @@ class IntentCommandHandler(CommandHandler):
     def __init__(self, bot):
         super().__init__(bot, "intent", ["i", "intents"], "Command to view and modify my NLP intents",
                          f"{settings.BOT_PREFIX}intent <info/list> [args...]",
-                         f"> {settings.BOT_PREFIX}intent info greetings\n"
+                         f"{settings.BOT_PREFIX}intent info greetings\n"
                          f"> {settings.BOT_PREFIX}intent list")
         self.is_reloading = False
 

@@ -36,4 +36,4 @@ ENABLED_CHANNELS = {
 ######################
 # NLP CONFIGURATIONS #
 ######################
-NLP_CONFIDENCE_THRESHOLD = 0.7
+NLP_CONFIDENCE_THRESHOLD = 0.9

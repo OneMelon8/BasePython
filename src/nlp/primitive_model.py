@@ -8,9 +8,9 @@ import tensorflow as tf
 import tflearn
 from nltk.stem.lancaster import LancasterStemmer
 
-PATH_INTENT = "nlp/intents.json"
-PATH_WORDS_DATA = "nlp/data/bag_of_words.pickle"
-PATH_MODEL = "nlp/models/primitive.tflearn"
+PATH_INTENT = "src/nlp/intents.json"
+PATH_WORDS_DATA = "src/nlp/data/bag_of_words.pickle"
+PATH_MODEL = "src/nlp/models/primitive.tflearn"
 
 stemmer = LancasterStemmer()
 

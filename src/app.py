@@ -2,7 +2,7 @@ import os
 import sys
 
 import discord
-exit()
+
 # Stabilize imports
 current_dir = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(current_dir, ".."))  # two directories above

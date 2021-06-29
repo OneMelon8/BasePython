@@ -184,7 +184,7 @@ def create_and_train_model(epochs=1000, save_model=True):
         model = tflearn.DNN(net)
 
         # Train model
-        model.fit(train_x, train_y, n_epoch=epochs, batch_size=8, show_metric=True)
+        model.fit(train_x, train_y, n_epoch=epochs, batch_size=8)
 
         # Save model
         if save_model:

@@ -1,0 +1,21 @@
+{
+    "greeting": {
+        "patterns": [
+            "Hello"
+        ]
+    },
+    "farewell": {
+        "patterns": [
+            "Bye"
+        ]
+    },
+    "genshin_mine": {
+        "patterns": [
+            "which world should I mine?",
+            "whose world respawned?",
+            "whose world is ready?",
+            "time to mine",
+            "wanna mine?"
+        ]
+    }
+}

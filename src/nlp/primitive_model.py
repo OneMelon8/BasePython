@@ -228,6 +228,7 @@ def predict(message):
     # - float in each position representing confidence
     # - index represent index in the "intents" list (global)
     results = model.predict([bag_of_words(preprocess(message))])[0]
+    log.debug("Predictions: [" + ", ".join(f"{a:.2f}" for a in results) + "]")
 
     # We save the index of the maximum confidence
     index = np.argmax(results)

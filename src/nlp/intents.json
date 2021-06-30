@@ -1,21 +1,46 @@
 {
     "greeting": {
         "patterns": [
-            "Hello"
+            "hello",
+            "hi Base",
+            "good morning Baselard",
+            "greetings",
+            "good afternoon",
+            "good evening",
+            "what's up",
+            "howdy"
         ]
     },
     "farewell": {
         "patterns": [
-            "Bye"
+            "goodbye",
+            "see you later",
+            "see ya",
+            "peace",
+            "bye bye",
+            "talk to you later",
+            "ciao",
+            "good night",
+            "peace out",
+            "later"
+        ]
+    },
+    "headpat": {
+        "patterns": [
+            "pat pat",
+            "headpat",
+            "pats Base",
+            "gives a headpat",
+            "let me pat you"
         ]
     },
     "genshin_mine": {
         "patterns": [
-            "which world should I mine?",
-            "whose world respawned?",
-            "whose world is ready?",
+            "which world should I mine",
+            "whose world respawned",
+            "whose world is ready",
             "time to mine",
-            "wanna mine?"
+            "wanna mine"
         ]
     }
 }

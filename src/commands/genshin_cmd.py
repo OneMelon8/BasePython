@@ -16,9 +16,8 @@ class MineCommandHandler(CommandHandler, IntentHandler):
                                 f"{settings.BOT_PREFIX}mine [list/update] [args...]",
                                 f"{settings.BOT_PREFIX}mine update Breeze\n"
                                 f"> {settings.BOT_PREFIX}mine list")
-        # Initialize intent handler superclass self, bot, intent, description
+        # Initialize intent handler superclass
         IntentHandler.__init__(self, bot, "genshin_mine", "Check whose Genshin Impact world is ready to be mined")
-        self.is_reloading = False
 
     async def on_command(self, author, command, args, message, channel, guild):
         if len(args) < 1:

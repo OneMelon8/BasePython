@@ -7,6 +7,7 @@ import numpy as np
 import tensorflow as tf
 import tflearn
 from nltk.stem.lancaster import LancasterStemmer
+import src.utils.log_util as log
 
 PATH_INTENT = "src/nlp/intents.json"
 PATH_WORDS_DATA = "src/nlp/data/bag_of_words.pickle"
@@ -50,10 +51,21 @@ def generate_data(save_data=True):
         save_data (bool): whether to save the data to file
     """
     global dictionary, intents, utterances, train_x, train_y
+    global PATH_INTENT, PATH_WORDS_DATA, PATH_MODEL
 
     # Step 1: load data from intents file
-    with open(PATH_INTENT) as f:
-        data = json.load(f)
+    data = None
+    error_count = 0
+    while data is None and error_count < 5:
+        try:
+            with open(PATH_INTENT) as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            log.warning("Using local path for NLP data!")
+            PATH_INTENT = PATH_INTENT[4:]
+            PATH_WORDS_DATA = PATH_WORDS_DATA[4:]
+            PATH_MODEL = PATH_MODEL[4:]
+            error_count += 1
 
     # Reset global variables (in case of re-train)
     dictionary = set()

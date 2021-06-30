@@ -11,6 +11,7 @@ from src.bot import BotClient
 from src.commands import utility_cmd, nlp_cmd, genshin_cmd
 from src.utils.chat_handler import ChatHandler
 from src.data.environment import DISCORD_TOKEN
+from src.commands.intents import basic_intents
 
 print("Hello (happy) world!")
 # Create intent
@@ -24,6 +25,8 @@ bot = BotClient(intents=intent)
 nlp_cmd.register_all(bot)
 utility_cmd.register_all(bot)
 genshin_cmd.register_all(bot)
+
+basic_intents.register_all(bot)
 
 # Register NLP chat handler
 bot.register_chat_handler(ChatHandler(bot))

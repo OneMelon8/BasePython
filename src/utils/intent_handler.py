@@ -33,14 +33,15 @@ class IntentHandler:
             return
 
         await reply_message.add_reaction(emojis.MAGNIFYING_GLASS)
+        await self.bot.react_cross(reply_message)
 
         async def on_react(_, _2, emote, _3, _4, _5):
-            # Confirm emote
-            if emote != emojis.MAGNIFYING_GLASS:
-                return
-            await self.bot.reply(reply_message, embedded=self.get_nlp_results_embedded(confidence_dict))
+            if emote == emojis.MAGNIFYING_GLASS:
+                await self.bot.reply(reply_message, embedded=self.get_nlp_results_embedded(confidence_dict))
+            elif emote == emojis.CROSS:
+                await reply_message.delete()
 
-        reaction_handler = ReactionHandler(author, reply_message, [emojis.MAGNIFYING_GLASS], on_react)
+        reaction_handler = ReactionHandler(author, reply_message, [emojis.MAGNIFYING_GLASS, emojis.CROSS], on_react)
         self.bot.register_reaction_handler(reaction_handler)
 
     async def on_intent_detected(self, author, confidence, message, channel, guild):

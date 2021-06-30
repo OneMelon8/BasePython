@@ -25,7 +25,6 @@ class IntentCommandHandler(CommandHandler):
                          f"{settings.BOT_PREFIX}intent <info/list> [args...]",
                          f"{settings.BOT_PREFIX}intent info greetings\n"
                          f"> {settings.BOT_PREFIX}intent list")
-        self.is_reloading = False
 
     async def on_command(self, author, command, args, message, channel, guild):
         # Assert there is at least 1 arguments

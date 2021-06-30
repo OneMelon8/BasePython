@@ -32,7 +32,7 @@ def _print(level, message, flush=False):
         return
 
     file = sys.stdout
-    if level > STDERR_LEVEL:
+    if level >= STDERR_LEVEL:
         file = sys.stderr
 
     now = datetime.datetime.now()

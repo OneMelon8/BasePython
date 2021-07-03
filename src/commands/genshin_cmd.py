@@ -59,6 +59,7 @@ def get_mine_list_embedded(worlds):
             not_ready.append((player, days_left))
     embedded.add_field(name="**Ready:**", value=f"> {SEP.join(ready) if ready else None}", inline=False)
     not_ready_format = "{} ({})"
+    not_ready = sorted(not_ready, key=lambda a: a[1])
     not_ready_message = SEP.join(not_ready_format.format(a[0], a[1]) for a in not_ready) if not_ready else None
     embedded.add_field(name="**Respawning:**", value=f"> {not_ready_message}", inline=False)
     return embedded

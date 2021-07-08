@@ -87,7 +87,7 @@ def get_worlds():
     try:
         with ChainedStatement() as statement:
             result = list(statement.query(sql))
-        return {a[0]: max(a[1] + 3 - today, 0) for a in result}
+        return {a[0]: max(a[1] + 4 - today, 0) for a in result}
     except SQLError as e:
         log.error(e.strerror)
         return []

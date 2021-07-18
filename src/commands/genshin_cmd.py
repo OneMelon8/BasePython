@@ -52,26 +52,37 @@ def get_mine_list_embedded(worlds):
     )
     ready = []
     not_ready = []
-    for player, days_left in worlds.items():
-        if days_left == 0:
+    for player, seconds_left in worlds.items():
+        if seconds_left == 0:
             ready.append(player)
         else:
-            not_ready.append((player, days_left))
+            not_ready.append((player, seconds_left))
     embedded.add_field(name="**Ready:**", value=f"> {SEP.join(ready) if ready else None}", inline=False)
     not_ready_format = "{} ({})"
     not_ready = sorted(not_ready, key=lambda a: a[1])
-    not_ready_message = SEP.join(not_ready_format.format(a[0], a[1]) for a in not_ready) if not_ready else None
+    not_ready_message = SEP.join(not_ready_format.format(a[0], format_time(a[1])) for a in not_ready) if not_ready else None
     embedded.add_field(name="**Respawning:**", value=f"> {not_ready_message}", inline=False)
     return embedded
 
 
-def get_day_stamp():
+def get_time_stamp():
     pacific = pytz.timezone("US/Pacific")
-    return (datetime.datetime.now(pacific) - datetime.datetime(2021, 1, 1, tzinfo=pacific)).days
+    return (datetime.datetime.now(pacific) - datetime.datetime(2021, 1, 1, tzinfo=pacific)).total_seconds()
+
+
+def format_time(timestamp):
+    minute, second = divmod(timestamp, 60)
+    hour, minute = divmod(minute, 60)
+    day, hour = divmod(hour, 24)
+    message = ""
+    if day > 1:
+        message += f"{int(day)}d"
+    message += f"{int(hour):02d}h{int(minute):02d}m"
+    return message
 
 
 def update(player_name):
-    sql = f"INSERT INTO genshin_mine VALUES (\"{player_name}\", {get_day_stamp()}) ON DUPLICATE KEY UPDATE day_stamp={get_day_stamp()};"
+    sql = f"INSERT INTO genshin_mine VALUES (\"{player_name}\", {get_time_stamp()}) ON DUPLICATE KEY UPDATE time_stamp={get_time_stamp()};"
     try:
         with ChainedStatement() as statement:
             row_count = statement.execute(sql)
@@ -83,11 +94,11 @@ def update(player_name):
 
 def get_worlds():
     sql = f"SELECT * FROM genshin_mine"
-    today = get_day_stamp()
+    now = get_time_stamp()
     try:
         with ChainedStatement() as statement:
             result = list(statement.query(sql))
-        return {a[0]: max(a[1] + 4 - today, 0) for a in result}
+        return {a[0]: max(a[1] + 259200 - now, 0) for a in result}
     except SQLError as e:
         log.error(e.strerror)
         return []
@@ -102,4 +113,4 @@ def register_all(bot):
 
 
 if __name__ == "__main__":
-    print(get_day_stamp())
+    pass

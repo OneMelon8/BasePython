@@ -1,3 +1,5 @@
+from threading import Timer
+
 import discord
 
 import src.utils.log_util as log
@@ -12,11 +14,20 @@ class ToggleCommandHandler(CommandHandler):
         super().__init__(bot, "toggle", ["t"], "Toggle my NLP chat interface", "", "")
 
     async def on_command(self, author, command, args, message, channel, guild):
-        self.bot.chat_enabled = not self.bot.chat_enabled
+        self.bot.chat_enabled = True
         emote = emojis.UNMUTE if self.bot.chat_enabled else emojis.MUTE
         await message.add_reaction(emote)
         status = "enabled" if self.bot.chat_enabled else "disabled"
         log.info(f"NLP chat interface is now {status}")
+
+        # Disable after 3 minutes
+        def disable_chat():
+            self.bot.chat_enabled = False
+            status = "enabled" if self.bot.chat_enabled else "disabled"
+            log.info(f"[AUTO] NLP chat interface is now {status}")
+
+        t = Timer(3 * 60, disable_chat)
+        t.start()
 
 
 class IntentCommandHandler(CommandHandler):

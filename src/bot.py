@@ -26,7 +26,7 @@ class BotClient(discord.Client):
         self.reaction_handlers = []
         # Chat handler
         self.chat_handler = None
-        self.chat_enabled = True
+        self.chat_enabled = False
 
         log.info("Initialization complete!")
 

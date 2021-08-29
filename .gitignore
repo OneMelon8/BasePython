@@ -114,3 +114,5 @@ dmypy.json
 .pyre/
 
 .idea
+.nlp/data
+.nlp/models

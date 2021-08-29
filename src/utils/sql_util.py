@@ -206,7 +206,7 @@ if __name__ == "__main__":
     with ChainedStatement() as cs:
         results = []
         row_count = 0
-        # results = cs.query(f"SELECT * FROM genshin_mine")
+        results = cs.query(f"SELECT * FROM genshin_mine")
         # results = cs.query(f"DESCRIBE genshin_mine")
         # row_count = cs.insert("receivers", ("display_name", "endpoint", "token"), ("test_receiver", "6_mdIcKwU4ysyfd9N4R4yDsK", "bvp4GejNrxuT6P386d-PZ2TG"))
         # row_count = cs.update("genshin_mine", ("day_stamp",), (178,), "player=\"Geoff\"")

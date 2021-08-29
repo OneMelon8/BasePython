@@ -35,6 +35,13 @@ class MineCommandHandler(CommandHandler, IntentHandler):
             # Update mine
             update(args[1])
             await self.bot.react_check(message)
+        elif operation == "delete" or operation == "d":
+            if len(args) < 2:
+                await self.bot.reply(message, content=f"Invalid arguments! Usage: `{settings.BOT_PREFIX}mine delete <existing name>`")
+                return
+            # Delete mine entry
+            row_count = delete(args[1])
+            await self.bot.reply(message, content=f"Operation successful, {row_count} rows affected")
         else:
             await message.add_reaction(emojis.QUESTION)
             return
@@ -90,6 +97,13 @@ def update(player_name):
             raise SQLError("Potentially incorrect SQL operation!")
     except SQLError as e:
         log.error(e.strerror)
+
+
+def delete(player_name):
+    sql = f"DELETE FROM genshin_mine WHERE player=\"{player_name}\";"
+    with ChainedStatement() as statement:
+        row_count = statement.execute(sql)
+    return row_count
 
 
 def get_worlds():
